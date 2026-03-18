@@ -1,0 +1,206 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+    /* Warm ivory background */
+    --background: 0.951 0.015 85;
+    --foreground: 0.15 0 0;
+    --card: 0.963 0.012 85;
+    --card-foreground: 0.15 0 0;
+    --popover: 0.963 0.012 85;
+    --popover-foreground: 0.15 0 0;
+    /* Primary = dark button */
+    --primary: 0.12 0 0;
+    --primary-foreground: 0.951 0.015 85;
+    --secondary: 0.92 0.012 85;
+    --secondary-foreground: 0.15 0 0;
+    --muted: 0.92 0.012 85;
+    --muted-foreground: 0.475 0.012 85;
+    /* Gold accent */
+    --accent: 0.72 0.12 75;
+    --accent-foreground: 0.12 0 0;
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+    --border: 0.88 0.012 85;
+    --input: 0.88 0.012 85;
+    --ring: 0.72 0.12 75;
+    --chart-1: 0.72 0.12 75;
+    --chart-2: 0.6 0.118 184;
+    --chart-3: 0.4 0.07 227;
+    --chart-4: 0.83 0.19 84;
+    --chart-5: 0.77 0.19 70;
+    --sidebar: 0.963 0.012 85;
+    --sidebar-foreground: 0.15 0 0;
+    --sidebar-primary: 0.12 0 0;
+    --sidebar-primary-foreground: 0.951 0.015 85;
+    --sidebar-accent: 0.92 0.012 85;
+    --sidebar-accent-foreground: 0.15 0 0;
+    --sidebar-border: 0.88 0.012 85;
+    --sidebar-ring: 0.72 0.12 75;
+    /* Custom tokens */
+    --gold: 0.72 0.12 75;
+    --gold-light: 0.82 0.1 75;
+    --ivory: 0.951 0.015 85;
+    --near-black: 0.12 0 0;
+    --footer-bg: 0.09 0 0;
+    --footer-text: 0.86 0.01 85;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: "DM Sans", sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: "Playfair Display", serif;
+  }
+}
+
+@layer utilities {
+  .font-serif {
+    font-family: "Playfair Display", serif;
+  }
+  .font-sans {
+    font-family: "DM Sans", sans-serif;
+  }
+  .text-gold {
+    color: oklch(var(--gold));
+  }
+  .bg-gold {
+    background-color: oklch(var(--gold));
+  }
+  .border-gold {
+    border-color: oklch(var(--gold));
+  }
+  .bg-footer {
+    background-color: oklch(var(--footer-bg));
+  }
+  .text-footer {
+    color: oklch(var(--footer-text));
+  }
+  .bg-ivory {
+    background-color: oklch(var(--ivory));
+  }
+  .text-near-black {
+    color: oklch(var(--near-black));
+  }
+  .glass {
+    background: rgba(244, 240, 230, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .gold-gradient {
+    background: linear-gradient(
+      135deg,
+      oklch(0.72 0.12 75),
+      oklch(0.62 0.14 70)
+    );
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+@keyframes heroText {
+  0% {
+    opacity: 0;
+    transform: translateY(32px);
+    letter-spacing: 0.3em;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    letter-spacing: 0.1em;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.7s ease forwards;
+}
+.animate-fade-in {
+  animation: fadeIn 0.6s ease forwards;
+}
+.animate-hero-text {
+  animation: heroText 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.animate-hero-text-delay {
+  animation: heroText 1.2s 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+.animate-hero-cta {
+  animation: fadeInUp 0.8s 0.6s ease forwards;
+  opacity: 0;
+}
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Product card hover */
+.product-card-img {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.product-card:hover .product-card-img {
+  transform: scale(1.08);
+}
+.product-card-overlay {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.product-card:hover .product-card-overlay {
+  opacity: 1;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: oklch(var(--background));
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(var(--gold));
+  border-radius: 3px;
+}
