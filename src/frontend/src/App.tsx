@@ -11,6 +11,7 @@ import Header from "./components/Header";
 import { AppProvider } from "./context/AppContext";
 import About from "./pages/About";
 import Admin from "./pages/Admin";
+import Bracelets from "./pages/Bracelets";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Contact from "./pages/Contact";
@@ -43,6 +44,11 @@ const shopRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/shop",
   component: Shop,
+});
+const braceletsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/bracelets",
+  component: Bracelets,
 });
 const productRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -93,6 +99,7 @@ const adminRoute = createRoute({
 const routeTree = rootRoute.addChildren([
   indexRoute,
   shopRoute,
+  braceletsRoute,
   productRoute,
   cartRoute,
   checkoutRoute,

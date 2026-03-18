@@ -37,7 +37,7 @@ export default function Header() {
   ];
 
   const collectionLinks = [
-    { label: "Bracelets", href: "/shop?category=bracelets" },
+    { label: "Bracelets", href: "/bracelets" },
     { label: "Necklaces", href: "/shop?category=necklaces" },
     { label: "Rings", href: "/shop?category=rings" },
     { label: "Earrings", href: "/shop?category=earrings" },
@@ -54,7 +54,12 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center" data-ocid="nav.link">
+          <Link
+            to="/"
+            className="flex items-center"
+            data-ocid="nav.link"
+            id="111anva"
+          >
             <span className="font-serif text-xl md:text-2xl font-bold tracking-widest text-foreground">
               JEWEL <span className="text-gold">X</span>
             </span>
