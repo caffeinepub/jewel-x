@@ -85,7 +85,7 @@ export default function Header() {
                   {collectionLinks.map((l) => (
                     <Link
                       key={l.label}
-                      to="/shop"
+                      to={l.href as any}
                       className="block px-4 py-2 text-xs tracking-widest hover:text-gold hover:bg-muted transition-colors"
                       data-ocid="nav.collection.link"
                     >
@@ -98,7 +98,7 @@ export default function Header() {
             {navLinks.map((l) => (
               <Link
                 key={l.label}
-                to="/shop"
+                to={l.href as any}
                 className="text-xs tracking-[0.15em] font-medium text-foreground hover:text-gold transition-colors"
                 data-ocid="nav.link"
               >
@@ -178,7 +178,7 @@ export default function Header() {
             {collectionLinks.map((l) => (
               <Link
                 key={l.label}
-                to="/shop"
+                to={l.href as any}
                 className="block py-2 text-sm font-medium hover:text-gold"
                 data-ocid="nav.mobile.collection.link"
               >
@@ -190,7 +190,7 @@ export default function Header() {
             {navLinks.map((l) => (
               <Link
                 key={l.label}
-                to="/shop"
+                to={l.href as any}
                 className="block py-2 text-sm font-medium tracking-widest hover:text-gold"
                 data-ocid="nav.mobile.link"
               >
