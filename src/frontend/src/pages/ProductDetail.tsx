@@ -10,10 +10,12 @@ import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Link, useNavigate, useParams } from "@tanstack/react-router";
 import {
+  CheckCircle,
   ChevronLeft,
   ChevronRight,
   Heart,
   Info,
+  Loader2,
   Package,
   ShieldCheck,
   ShoppingCart,
@@ -137,6 +139,40 @@ function CountdownTimer({ productId }: { productId: string }) {
   );
 }
 
+const METRO_PREFIXES: Record<string, { city: string; days: string }> = {
+  "11": { city: "Delhi", days: "2-4 business days" },
+  "10": { city: "Delhi NCR", days: "2-4 business days" },
+  "12": { city: "Haryana", days: "3-5 business days" },
+  "13": { city: "Punjab", days: "3-5 business days" },
+  "40": { city: "Mumbai", days: "2-4 business days" },
+  "41": { city: "Thane", days: "2-4 business days" },
+  "42": { city: "Pune", days: "3-5 business days" },
+  "60": { city: "Chennai", days: "2-4 business days" },
+  "61": { city: "Tamil Nadu", days: "3-5 business days" },
+  "70": { city: "Kolkata", days: "2-4 business days" },
+  "71": { city: "West Bengal", days: "3-5 business days" },
+  "50": { city: "Hyderabad", days: "2-4 business days" },
+  "51": { city: "Telangana", days: "3-5 business days" },
+  "38": { city: "Ahmedabad", days: "2-4 business days" },
+  "39": { city: "Gujarat", days: "3-5 business days" },
+  "56": { city: "Bengaluru", days: "2-4 business days" },
+  "57": { city: "Karnataka", days: "3-5 business days" },
+  "30": { city: "Jaipur", days: "3-5 business days" },
+  "31": { city: "Rajasthan", days: "3-5 business days" },
+  "22": { city: "Uttar Pradesh", days: "3-5 business days" },
+  "20": { city: "Madhya Pradesh", days: "3-5 business days" },
+  "80": { city: "Bihar", days: "4-6 business days" },
+  "75": { city: "Odisha", days: "4-6 business days" },
+  "79": { city: "Assam", days: "5-7 business days" },
+};
+
+function getPincodeInfo(pincode: string): { city: string; days: string } {
+  const prefix = pincode.slice(0, 2);
+  return (
+    METRO_PREFIXES[prefix] ?? { city: "Your Area", days: "3-5 business days" }
+  );
+}
+
 const MOCK_MINI_REVIEWS = [
   {
     id: "mr1",
@@ -233,6 +269,12 @@ export default function ProductDetail() {
   const [qty, setQty] = useState(1);
   const [imgIdx, setImgIdx] = useState(0);
   const [pincode, setPincode] = useState("");
+  const [pincodeChecking, setPincodeChecking] = useState(false);
+  const [pincodeResult, setPincodeResult] = useState<null | {
+    available: boolean;
+    city: string;
+    days: string;
+  }>(null);
   const [_reviewSlide, setReviewSlide] = useState(0);
   const navigate = useNavigate();
   const wished = isInWishlist(product.id);
@@ -243,14 +285,7 @@ export default function ProductDetail() {
   const urgencyCount = getUrgencyCount(product.id);
   const reviewCarouselRef = useRef<HTMLDivElement>(null);
 
-  const images =
-    product.imageUrls.length > 1
-      ? product.imageUrls
-      : [
-          ...product.imageUrls,
-          ...product.imageUrls,
-          ...product.imageUrls,
-        ].slice(0, 3);
+  const images = product.imageUrls;
 
   const discountPct = product.originalPrice
     ? Math.round(
@@ -278,6 +313,17 @@ export default function ProductDetail() {
     if (reviewCarouselRef.current) {
       reviewCarouselRef.current.scrollBy({ left: 280, behavior: "smooth" });
     }
+  };
+
+  const handlePincodeCheck = () => {
+    if (pincode.length < 6) return;
+    setPincodeChecking(true);
+    setPincodeResult(null);
+    setTimeout(() => {
+      const info = getPincodeInfo(pincode);
+      setPincodeResult({ available: true, city: info.city, days: info.days });
+      setPincodeChecking(false);
+    }, 500);
   };
 
   // Bullet points from description
@@ -838,7 +884,11 @@ export default function ProductDetail() {
                 <Input
                   placeholder="Enter Pincode"
                   value={pincode}
-                  onChange={(e) => setPincode(e.target.value.slice(0, 6))}
+                  onChange={(e) => {
+                    setPincode(e.target.value.replace(/\D/g, "").slice(0, 6));
+                    setPincodeResult(null);
+                  }}
+                  onKeyDown={(e) => e.key === "Enter" && handlePincodeCheck()}
                   maxLength={6}
                   className="h-9 text-sm"
                   style={{
@@ -849,17 +899,51 @@ export default function ProductDetail() {
                   data-ocid="product.pincode.input"
                 />
                 <Button
+                  onClick={handlePincodeCheck}
+                  disabled={pincode.length < 6 || pincodeChecking}
                   className="h-9 px-4 text-sm font-semibold rounded-lg"
                   style={{
-                    background: "#f15a22",
+                    background: pincode.length < 6 ? "#ccc" : "#f15a22",
                     color: "white",
                     border: "none",
                   }}
                   data-ocid="product.pincode.check"
                 >
-                  Check
+                  {pincodeChecking ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    "Check"
+                  )}
                 </Button>
               </div>
+
+              {/* Pincode Result */}
+              {pincodeResult && (
+                <div
+                  className="mt-3 flex items-start gap-3 px-3 py-2.5 rounded-lg"
+                  style={{ background: "#f0faf4", border: "1px solid #a8d5b8" }}
+                  data-ocid="product.pincode.success_state"
+                >
+                  <CheckCircle
+                    className="w-5 h-5 flex-shrink-0 mt-0.5"
+                    style={{ color: "#2e8b57" }}
+                  />
+                  <div>
+                    <p
+                      className="text-sm font-semibold"
+                      style={{ color: "#1a6b3a" }}
+                    >
+                      Delivery available to {pincodeResult.city}
+                    </p>
+                    <p className="text-xs mt-0.5" style={{ color: "#2e7d32" }}>
+                      Estimated delivery: <strong>{pincodeResult.days}</strong>
+                    </p>
+                    <p className="text-xs mt-0.5" style={{ color: "#2e7d32" }}>
+                      🚚 FREE shipping on all orders
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Accordion Sections */}

@@ -149,6 +149,7 @@ export const MOCK_PRODUCTS: MockProduct[] = [
     category: "karungali",
     imageUrls: [
       "https://japam.in/cdn/shop/files/1_6c434c29-906f-4954-9296-c10cdef73a26.jpg?v=1745063526&width=460",
+      "https://japam.in/cdn/shop/files/2_6c08cd5a-989d-4aaa-821f-d1933b150934.jpg?v=1720508974&width=460",
     ],
     materials: ["Karungali"],
     rating: 4.9,
@@ -710,7 +711,10 @@ export const MOCK_PRODUCTS: MockProduct[] = [
       "Pyrite & Tiger Eye beads for wealth & success. Lab certified authentic stones. Worn daily to attract financial abundance and success in business.",
     category: "bracelets",
     imageUrls: [
+      "https://astrotalk.store/cdn/shop/files/newdhanyogcopy_4ffd7207-2ff2-488f-8324-ad849e5972f7.webp?v=1771412222",
       "https://astrotalk.store/cdn/shop/files/new_dhanyog_copy_large.webp?v=1771411837",
+      "https://astrotalk.store/cdn/shop/files/2_1aa16c4f-6b9d-4811-b6e1-9eb4bab60777.webp?v=1772448525",
+      "https://astrotalk.store/cdn/shop/files/2_378e56ad-be74-4662-ac3c-80fc15ae2382.webp?v=1772448525",
     ],
     materials: ["Pyrite", "Tiger Eye"],
     rating: 4.8,
@@ -1222,7 +1226,10 @@ export const MOCK_PRODUCTS: MockProduct[] = [
       "Pyrite & Tiger Eye beads for wealth & success. Lab certified authentic stones.",
     category: "bracelets",
     imageUrls: [
-      "https://cdn.shopify.com/s/files/1/0878/4907/4985/files/new_dhanyog_copy.webp?v=1771411837",
+      "https://astrotalk.store/cdn/shop/files/newdhanyogcopy_4ffd7207-2ff2-488f-8324-ad849e5972f7.webp?v=1771412222",
+      "https://astrotalk.store/cdn/shop/files/new_dhanyog_copy_large.webp?v=1771411837",
+      "https://astrotalk.store/cdn/shop/files/2_1aa16c4f-6b9d-4811-b6e1-9eb4bab60777.webp?v=1772448525",
+      "https://astrotalk.store/cdn/shop/files/2_378e56ad-be74-4662-ac3c-80fc15ae2382.webp?v=1772448525",
     ],
     materials: ["Pyrite", "Tiger Eye"],
     rating: 4.8,
