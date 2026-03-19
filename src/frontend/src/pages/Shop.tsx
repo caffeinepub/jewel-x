@@ -10,6 +10,7 @@ import { Slider } from "@/components/ui/slider";
 import { useSearch } from "@tanstack/react-router";
 import { SlidersHorizontal, X } from "lucide-react";
 import { useMemo, useState } from "react";
+import BackButton from "../components/BackButton";
 import ProductCard from "../components/ProductCard";
 import SectionTitle from "../components/SectionTitle";
 import { MOCK_CATEGORIES, MOCK_PRODUCTS, formatPrice } from "../data/mockData";
@@ -52,6 +53,7 @@ export default function Shop() {
 
   return (
     <main className="pt-24 pb-20 min-h-screen">
+      <BackButton />
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="mb-10">
           <SectionTitle

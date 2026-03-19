@@ -6,6 +6,7 @@ import { Clock, Mail, MessageCircle, Phone } from "lucide-react";
 import { useState } from "react";
 import { SiWhatsapp } from "react-icons/si";
 import { toast } from "sonner";
+import BackButton from "../components/BackButton";
 
 export default function Contact() {
   const [form, setForm] = useState({
@@ -27,6 +28,7 @@ export default function Contact() {
 
   return (
     <main className="pt-24 pb-20 min-h-screen">
+      <BackButton />
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Page header */}
         <div className="text-center mb-14">

@@ -1,10 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Award, Gem, Heart, Leaf } from "lucide-react";
+import BackButton from "../components/BackButton";
 import ScrollReveal from "../components/ScrollReveal";
 
 export default function About() {
   return (
     <main className="pt-24 pb-20 min-h-screen">
+      <BackButton />
       {/* Hero */}
       <section className="relative bg-foreground text-primary-foreground py-24 md:py-36 px-6 text-center overflow-hidden">
         <div className="absolute inset-0 bg-[url('/assets/generated/hero-banner.dim_1400x700.jpg')] bg-cover bg-center opacity-20" />

@@ -8,6 +8,7 @@ import {
 } from "@tanstack/react-router";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import PageTransition from "./components/PageTransition";
 import { AppProvider } from "./context/AppContext";
 import About from "./pages/About";
 import Admin from "./pages/Admin";
@@ -19,6 +20,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Orders from "./pages/Orders";
 import ProductDetail from "./pages/ProductDetail";
+import Rudraksha from "./pages/Rudraksha";
 import Shop from "./pages/Shop";
 import Wishlist from "./pages/Wishlist";
 
@@ -26,7 +28,9 @@ function RootLayout() {
   return (
     <AppProvider>
       <Header />
-      <Outlet />
+      <PageTransition>
+        <Outlet />
+      </PageTransition>
       <Footer />
       <Toaster position="bottom-right" richColors />
     </AppProvider>
@@ -49,6 +53,11 @@ const braceletsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/bracelets",
   component: Bracelets,
+});
+const rudrakshaRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/rudraksha",
+  component: Rudraksha,
 });
 const productRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -100,6 +109,7 @@ const routeTree = rootRoute.addChildren([
   indexRoute,
   shopRoute,
   braceletsRoute,
+  rudrakshaRoute,
   productRoute,
   cartRoute,
   checkoutRoute,

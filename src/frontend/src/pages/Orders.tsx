@@ -8,6 +8,7 @@ import {
   Truck,
   XCircle,
 } from "lucide-react";
+import BackButton from "../components/BackButton";
 import { formatPrice } from "../data/mockData";
 
 const MOCK_ORDERS = [
@@ -91,6 +92,7 @@ const statusConfig = {
 export default function Orders() {
   return (
     <main className="pt-24 pb-20 min-h-screen">
+      <BackButton />
       <div className="max-w-3xl mx-auto px-4 sm:px-6">
         <h1 className="font-serif text-3xl md:text-4xl font-bold mb-10">
           My Orders

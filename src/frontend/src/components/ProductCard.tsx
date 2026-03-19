@@ -9,9 +9,14 @@ interface Props {
   index?: number;
 }
 
+function getUrgencyCount(id: string): number {
+  return (Math.abs(id.charCodeAt(0) + id.charCodeAt(id.length - 1)) % 5) + 1;
+}
+
 export default function ProductCard({ product, index = 0 }: Props) {
   const { addToCart, toggleWishlist, isInWishlist } = useApp();
   const wished = isInWishlist(product.id);
+  const urgencyCount = getUrgencyCount(product.id);
 
   return (
     <div
@@ -90,6 +95,13 @@ export default function ProductCard({ product, index = 0 }: Props) {
               {formatPrice(product.originalPrice)}
             </span>
           )}
+        </div>
+        {/* Urgency badge */}
+        <div className="flex items-center gap-1 mt-2">
+          <span className="inline-block w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+          <span className="text-[10px] font-semibold text-red-500">
+            Only {urgencyCount} left!
+          </span>
         </div>
       </div>
     </div>

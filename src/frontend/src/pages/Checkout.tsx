@@ -6,6 +6,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { Banknote, CheckCircle2, QrCode, Smartphone } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import BackButton from "../components/BackButton";
 import { useApp } from "../context/AppContext";
 import { formatPrice } from "../data/mockData";
 
@@ -142,6 +143,7 @@ export default function Checkout() {
 
   return (
     <main className="pt-24 pb-20 min-h-screen">
+      <BackButton />
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <h1 className="font-serif text-3xl md:text-4xl font-bold mb-10">
           Checkout

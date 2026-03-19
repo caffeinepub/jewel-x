@@ -1,6 +1,8 @@
+import { Link } from "@tanstack/react-router";
 import { Heart, ShoppingBag, Star } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import BackButton from "../components/BackButton";
 import SectionTitle from "../components/SectionTitle";
 import { useApp } from "../context/AppContext";
 
@@ -352,6 +354,7 @@ export default function Bracelets() {
 
   return (
     <main className="pt-24 pb-20 min-h-screen">
+      <BackButton />
       {/* Hero Banner */}
       <div className="relative bg-gradient-to-b from-[#1a1208] to-[#2d1f0e] text-white py-16 px-4 text-center mb-12 overflow-hidden">
         <div className="absolute inset-0 opacity-10 bg-[url('https://cdn.shopify.com/s/files/1/0878/4907/4985/collections/bracelet_1.png?v=1751625953')] bg-cover bg-center" />
@@ -404,9 +407,11 @@ export default function Bracelets() {
           {sorted.map((product) => {
             const inWishlist = wishlist.some((w) => w.id === product.id);
             return (
-              <div
+              <Link
                 key={product.id}
-                className="group relative bg-card border border-border rounded-lg overflow-hidden hover:shadow-card-hover hover:border-gold/30 transition-all duration-300"
+                to="/product/$id"
+                params={{ id: product.id }}
+                className="group relative bg-card border border-border rounded-lg overflow-hidden hover:shadow-card-hover hover:border-gold/30 transition-all duration-300 block"
               >
                 {/* Badge */}
                 {product.badge && (
@@ -434,7 +439,9 @@ export default function Bracelets() {
                   {/* Wishlist button */}
                   <button
                     type="button"
-                    onClick={() =>
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
                       toggleWishlist({
                         id: product.id,
                         name: product.name,
@@ -450,8 +457,8 @@ export default function Bracelets() {
                         isBestSeller: false,
                         stock: 10,
                         badge: product.badge ?? undefined,
-                      })
-                    }
+                      });
+                    }}
                     className="absolute top-2 right-7 z-10 p-1.5 rounded-full bg-white/80 hover:bg-white transition-colors"
                     aria-label="Wishlist"
                   >
@@ -503,7 +510,9 @@ export default function Bracelets() {
                   {/* Add to Cart */}
                   <button
                     type="button"
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
                       addToCart({
                         id: product.id,
                         name: product.name,
@@ -528,7 +537,7 @@ export default function Bracelets() {
                     ADD TO CART
                   </button>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>

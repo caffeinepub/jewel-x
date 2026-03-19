@@ -3,6 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { Gem } from "lucide-react";
 import { useEffect } from "react";
+import BackButton from "../components/BackButton";
 import { useInternetIdentity } from "../hooks/useInternetIdentity";
 
 export default function Login() {
@@ -34,6 +35,7 @@ export default function Login() {
 
   return (
     <main className="pt-24 pb-20 min-h-screen flex items-center justify-center">
+      <BackButton />
       <div className="text-center max-w-sm px-6">
         <div className="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-8">
           <Gem className="w-8 h-8 text-gold" />

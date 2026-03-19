@@ -1,13 +1,5 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import {
-  ChevronDown,
-  Heart,
-  Menu,
-  Search,
-  ShoppingBag,
-  User,
-  X,
-} from "lucide-react";
+import { ChevronDown, Heart, Menu, Search, ShoppingBag, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useApp } from "../context/AppContext";
 
@@ -33,7 +25,6 @@ export default function Header() {
     { label: "BRIDAL", href: "/shop" },
     { label: "SHOP", href: "/shop" },
     { label: "ABOUT", href: "/about" },
-    { label: "CONTACT", href: "/contact" },
   ];
 
   const collectionLinks = [
@@ -122,14 +113,6 @@ export default function Header() {
             >
               <Search className="w-4 h-4" />
             </button>
-            <Link
-              to="/login"
-              className="p-1.5 hover:text-gold transition-colors"
-              aria-label="Account"
-              data-ocid="nav.user.link"
-            >
-              <User className="w-4 h-4" />
-            </Link>
             <Link
               to="/wishlist"
               className="p-1.5 hover:text-gold transition-colors relative"

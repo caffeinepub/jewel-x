@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
+import BackButton from "../components/BackButton";
 import { useApp } from "../context/AppContext";
 import { formatPrice } from "../data/mockData";
 
@@ -12,6 +13,7 @@ export default function Cart() {
 
   return (
     <main className="pt-24 pb-20 min-h-screen">
+      <BackButton />
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <h1 className="font-serif text-3xl md:text-4xl font-bold mb-10">
           Shopping Bag

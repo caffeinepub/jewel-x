@@ -31,6 +31,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import BackButton from "../components/BackButton";
 import {
   MOCK_CATEGORIES,
   MOCK_PRODUCTS,
@@ -173,6 +174,7 @@ export default function Admin() {
 
   return (
     <main className="pt-24 pb-20 min-h-screen">
+      <BackButton />
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between mb-8">
           <h1 className="font-serif text-3xl font-bold">Admin Dashboard</h1>
