@@ -21,6 +21,7 @@ import {
   ShoppingCart,
   Star,
   Truck,
+  XCircle,
   Zap,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -165,6 +166,8 @@ const METRO_PREFIXES: Record<string, { city: string; days: string }> = {
   "75": { city: "Odisha", days: "4-6 business days" },
   "79": { city: "Assam", days: "5-7 business days" },
 };
+
+const BLACKLISTED_PINCODES = ["110049"];
 
 function getPincodeInfo(pincode: string): { city: string; days: string } {
   const prefix = pincode.slice(0, 2);
@@ -320,8 +323,12 @@ export default function ProductDetail() {
     setPincodeChecking(true);
     setPincodeResult(null);
     setTimeout(() => {
-      const info = getPincodeInfo(pincode);
-      setPincodeResult({ available: true, city: info.city, days: info.days });
+      if (BLACKLISTED_PINCODES.includes(pincode)) {
+        setPincodeResult({ available: false, city: "Unavailable", days: "" });
+      } else {
+        const info = getPincodeInfo(pincode);
+        setPincodeResult({ available: true, city: info.city, days: info.days });
+      }
       setPincodeChecking(false);
     }, 500);
   };
@@ -918,32 +925,71 @@ export default function ProductDetail() {
               </div>
 
               {/* Pincode Result */}
-              {pincodeResult && (
-                <div
-                  className="mt-3 flex items-start gap-3 px-3 py-2.5 rounded-lg"
-                  style={{ background: "#f0faf4", border: "1px solid #a8d5b8" }}
-                  data-ocid="product.pincode.success_state"
-                >
-                  <CheckCircle
-                    className="w-5 h-5 flex-shrink-0 mt-0.5"
-                    style={{ color: "#2e8b57" }}
-                  />
-                  <div>
-                    <p
-                      className="text-sm font-semibold"
-                      style={{ color: "#1a6b3a" }}
-                    >
-                      Delivery available to {pincodeResult.city}
-                    </p>
-                    <p className="text-xs mt-0.5" style={{ color: "#2e7d32" }}>
-                      Estimated delivery: <strong>{pincodeResult.days}</strong>
-                    </p>
-                    <p className="text-xs mt-0.5" style={{ color: "#2e7d32" }}>
-                      🚚 FREE shipping on all orders
-                    </p>
+              {pincodeResult &&
+                (pincodeResult.available ? (
+                  <div
+                    className="mt-3 flex items-start gap-3 px-3 py-2.5 rounded-lg"
+                    style={{
+                      background: "#f0faf4",
+                      border: "1px solid #a8d5b8",
+                    }}
+                    data-ocid="product.pincode.success_state"
+                  >
+                    <CheckCircle
+                      className="w-5 h-5 flex-shrink-0 mt-0.5"
+                      style={{ color: "#2e8b57" }}
+                    />
+                    <div>
+                      <p
+                        className="text-sm font-semibold"
+                        style={{ color: "#1a6b3a" }}
+                      >
+                        Delivery available to {pincodeResult.city}
+                      </p>
+                      <p
+                        className="text-xs mt-0.5"
+                        style={{ color: "#2e7d32" }}
+                      >
+                        Estimated delivery:{" "}
+                        <strong>{pincodeResult.days}</strong>
+                      </p>
+                      <p
+                        className="text-xs mt-0.5"
+                        style={{ color: "#2e7d32" }}
+                      >
+                        🚚 FREE shipping on all orders
+                      </p>
+                    </div>
                   </div>
-                </div>
-              )}
+                ) : (
+                  <div
+                    className="mt-3 flex items-start gap-3 px-3 py-2.5 rounded-lg"
+                    style={{
+                      background: "#fff0f0",
+                      border: "1px solid #ffb3b3",
+                    }}
+                    data-ocid="product.pincode.error_state"
+                  >
+                    <XCircle
+                      className="w-5 h-5 flex-shrink-0 mt-0.5"
+                      style={{ color: "#c0392b" }}
+                    />
+                    <div>
+                      <p
+                        className="text-sm font-semibold"
+                        style={{ color: "#c0392b" }}
+                      >
+                        Delivery not available
+                      </p>
+                      <p
+                        className="text-xs mt-0.5"
+                        style={{ color: "#e74c3c" }}
+                      >
+                        Sorry, we currently do not deliver to this pincode.
+                      </p>
+                    </div>
+                  </div>
+                ))}
             </div>
 
             {/* Accordion Sections */}
